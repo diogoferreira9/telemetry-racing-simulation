@@ -25,22 +25,22 @@
 
 typedef struct StatusCarro
 {
-    short id;  /* Numero de carro */
-    int volta; /* Volta na pista */
+    short id;  // numero de carro
+    int volta; // volta na pista
     int setor;
     float tempo;
     double combustivel;
     int pneus;
-    char tipo_pneu[TAMANHO_NOME]; /* tipo pneu */
+    char tipo_pneu[TAMANHO_NOME]; // tipo pneu
 } Status;
 
 typedef struct OrganizacaoCorrida
 {
-    short id;                       /* Numero de carro */
-    char nome_equipa[TAMANHO_NOME]; /* Nome da equipa do carro */
-    char nome_piloto[TAMANHO_NOME]; /* Nome da equipa do carro */
-    int id_equipa;                  /* Id unico da equipa*/
-    int pneus_disponiveis;          /* pneus disponives */
+    short id;                       // numero de carro
+    char nome_equipa[TAMANHO_NOME]; // nome da equipa do carro
+    char nome_piloto[TAMANHO_NOME]; // nome da equipa do carro
+    int id_equipa;                  // id unico da equipa
+    int pneus_disponiveis;          // pneus disponives
 } Organizacao;
 
 void *criaMemoriaPartilhada(char *nome, int tamanho)
@@ -57,7 +57,7 @@ void *criaMemoriaPartilhada(char *nome, int tamanho)
         exit(1);
     }
 
-    /* Define tamanho da memoria partilhada */
+    // define tamanho da memoria partilhada
     ret = ftruncate(fd, tamanho);
     if (ret == -1)
     {
@@ -65,7 +65,7 @@ void *criaMemoriaPartilhada(char *nome, int tamanho)
         exit(2);
     }
 
-    /* Associa memoria partilhada ao ponteiro ptr */
+    // associa memoria partilhada ao ponteiro ptr
     ptr = mmap(0, tamanho, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     if (ptr == MAP_FAILED)
     {
