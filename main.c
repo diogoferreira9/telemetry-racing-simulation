@@ -316,12 +316,9 @@ void *lerTelemetria(void *carro)
             {
                 sem_post(semEquipa); // libera o semáforo da equipe para outras threads/processos
             }
-
             // lê os dados da telemetria da mensagem
-            sscanf(mensagem, "| %hd | %d | %d | %f | %lf | %d | %s |",
-                   &car_stat->id, &car_stat->volta, &car_stat->setor,
-                   &car_stat->tempo, &car_stat->combustivel, &car_stat->pneus, car_stat->tipo_pneu);
-
+            sscanf(mensagem, "| %hd | %d | %d | %f | %lf | %d | %s |", &car_stat->id, &car_stat->volta, &car_stat->setor, &car_stat->tempo, &car_stat->combustivel, &car_stat->pneus, car_stat->tipo_pneu);
+            printf("%s", mensagem);
             // verifica condições para ir ao BOX (pneus ou combustível baixos)
             if ((car_stat->pneus < 10) || (car_stat->combustivel < 10))
             {
@@ -583,9 +580,9 @@ int main(int argc, char **argv)
     for (int i = 0; i < NUM_CARROS; i++)
     {
         sprintf(semNomeTeam, "/Equipa%d.sem", i + 1);
-        sem_unlink(semNomeTeam); // Remove os semáforos das equipes
+        sem_unlink(semNomeTeam); // remove os semáforos das equipes
     }
 
-    sleep(1); // Espera curta para garantir que todas as operações de limpeza sejam concluídas
-    return 0; // Encerra o programa
+    sleep(1); // espera curta para garantir que todas as operações de limpeza sejam concluídas
+    return 0; // encerra o programa
 }
