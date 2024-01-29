@@ -1,44 +1,32 @@
-# RaceSync
- "RaceSync" is a streamlined software for auto race simulations, enabling real-time monitoring of critical data like fuel levels, tire condition, and lap times. It utilizes shared memory and FIFO queues for efficient data communication, essential for dynamic race strategy and management.
-This code is a car racing simulation in C, employing advanced system programming concepts, including threads, shared memory, FIFOs (First In, First Out), and semaphores. Here's a detailed overview of its functionality and components:
+# Racing Simulation: Team Telemetry and Resource Management
 
-# Structure and Functioning
-Definitions and Library Inclusions: 
-* The code starts with constant definitions and includes various libraries necessary for process manipulation, threads, shared memory, semaphores, and FIFOs.
+## Overview
+The Racing Simulation project is a comprehensive multi-threaded application developed in C, simulating a car racing scenario. It focuses on team telemetry data handling, resource management (fuel and tires), and inter-process communication using shared memory, FIFOs, and semaphores. This project demonstrates complex synchronization mechanisms and IPC techniques in a real-time system context.
 
-Data Structures:
-* StatusCarro: Stores information about the state of each car in the race (ID, lap, sector, time, fuel, tires, tire type).  
-* OrganizacaoCorrida: Contains information about the teams of the cars (Car ID, team name, pilot name, team ID, available tires).
+## Features
+- **Telemetry Data Processing**: Each car's telemetry data (e.g., fuel level, tire condition, lap times) is read from individual FIFOs and processed to make strategic decisions, such as pit stops.
+- **Resource Management**: The application manages shared resources like fuel and tires, ensuring proper access control with semaphores to avoid race conditions.
+- **Real-Time Race Control**: Signals and alarms are used to handle race events, such as the start of the race, yellow flags (caution periods), and race termination due to time constraints.
+- **Team Synchronization**: Team-specific semaphores are used to synchronize actions like pit stops, ensuring that only one car from a team can be serviced at a time.
+- **Robust Inter-Process Communication**: The application uses FIFOs for communication between the race control (master thread) and individual cars (threads), and shared memory for shared data like team organization and global fuel reserve.
 
-Shared Memory Functions:
-* criaMemoriaPartilhada: Creates and maps a segment of shared memory.  
-* apagaMemoriaPartilhada: Unmaps and removes the shared memory segment.  
-* Semaphore and FIFO Functions: Several functions are used to handle semaphores and FIFOs, including creation, opening, reading, and writing in FIFOs, and finding semaphores based on team IDs.
+## Main Components
+- **Car Threads**: Each car in the race is represented by a thread that processes its telemetry data and makes decisions based on its current status and resources.
+- **Race Master Thread**: A master thread controls the race's overall flow, handling start, flags, and termination signals. It also processes and reacts to critical events, such as car crashes or despistes.
+- **Shared Memory**: Shared memory segments are used for storing information accessible to multiple processes, like the car's status and team organization data.
+- **FIFOs**: Named pipes (FIFOs) are used for communication between the car threads and the race master, transmitting telemetry data and control messages.
+- **Semaphores**: Semaphores are employed to manage access to shared resources, synchronize team-specific operations, and coordinate the race's start.
 
-Car Threads and Master Thread:
-* lerTelemetria: Processes the telemetry of each car, reading information from a FIFO, and determines if the car needs to pit.  
-* threadMaster: Controls the overall state of the race and responds to specific events such as the race start and car crashes.
+## How to Run
+1. **Compile the Code**: Use a C compiler to compile the source code.
+2. **Set Up**: Initialize the shared resources and start the race master thread.
+3. **Start the Race**: Car threads begin processing telemetry data and responding to race events.
+4. **Monitor and Control**: The race master monitors the race's progress, handles flags, and can terminate the race.
+5. **Finish**: At the end of the race or upon termination, resources are cleaned up, and results are displayed.
 
-Auxiliary Functions:
-* buscaPneusDisponiveis, buscaNomePiloto, buscaEquipa: Functions to fetch specific car information from shared memory.  
-* compara: Comparison function for sorting cars.  
-* imprimeResultados: Prints the race results.  
-* escreveTC: Writes a message to a specific FIFO.  
-* tiraUmCentilitro: Decreases the amount of fuel in the shared reservoir.
+## Conclusion
+This Racing Simulation project offers a detailed glimpse into the complexities of real-time systems and the synchronization of multiple threads and processes. It showcases how various IPC mechanisms can be utilized in a high-stakes environment like car racing, where timely and synchronized operations are crucial.
 
-Race Finishing and Control:
-* terminaCorridaAbruptamente: Abruptly ends the race.  
-* bandeiraAmarelaLevantada and bandeiraAmarelaRecolhida: Functions for race event control.  
+---
 
-Main Function (main):
-* Initializes semaphores and threads, sets signals and alarms, and executes the main race control.  
-* Creates and manages threads for each car and the master thread.  
-* Prints the results and cleans up resources at the end.  
-
-# Utilized Concepts
-* Threads: To simulate the race of each car and the master thread controlling the overall state.  
-* Shared Memory: For sharing information between processes, such as the state of cars and teams.  
-* FIFOs (Named Pipes): For inter-process communication, enabling telemetry data reading and writing and race control.  
-* Semaphores: For synchronization between threads and processes, ensuring controlled access to shared resources.  
-* Signals and Alarms: To handle external events and time conditions in the simulation.  
-* File Handling and Error Management: Uses functions for creating, opening, reading, writing, and closing FIFOs, along with error handling.  
+Enjoy the simulation and may the fastest team win!
