@@ -1,7 +1,7 @@
-# Racing Simulation: Team Telemetry and Resource Management
+# Telemetry Racing Simulation: Team Telemetry and Resource Management
 
 ## Overview
-The Racing Simulation project is a comprehensive multi-threaded application developed in C, simulating a car racing scenario. It focuses on team telemetry data handling, resource management (fuel and tires), and inter-process communication using shared memory, FIFOs, and semaphores. This project demonstrates complex synchronization mechanisms and IPC techniques in a real-time system context.
+The Telemetry Racing Simulation project is a comprehensive multi-threaded application developed in C, simulating a car racing scenario. It focuses on team telemetry data handling, resource management (fuel and tires), and inter-process communication using shared memory, FIFOs, and semaphores. This project demonstrates complex synchronization mechanisms and IPC techniques in a real-time system context.
 
 ## Features
 - **Telemetry Data Processing**: Each car's telemetry data (e.g., fuel level, tire condition, lap times) is read from individual FIFOs and processed to make strategic decisions, such as pit stops.
